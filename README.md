@@ -139,7 +139,7 @@ poetry run pytest tests
 ```text
 collected 1 item
 
-tests/test_myapplication.py::test_hello_world PASSED
+tests/test.py::test_hello_world PASSED
 ```
 
 </details>
@@ -157,13 +157,13 @@ poetry run pytest tests --cov=src
 ```text
 collected 1 item
 
-tests/test_myapplication.py::test_hello_world PASSED
+tests/test.py::test_hello_world PASSED
 
 ---------- coverage: platform linux, python 3.10.4-final-0 -----------
 Name                            Stmts   Miss  Cover
 ---------------------------------------------------
-src/myapplication/__init__.py       1      0   100%
-src/myapplication/main.py           6      2    67%
+src/__init__.py       1      0   100%
+src/main.py           6      2    67%
 ---------------------------------------------------
 TOTAL                               7      2    71%
 ```

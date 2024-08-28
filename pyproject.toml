@@ -12,12 +12,15 @@ homepage = "https://github.com/smarlhens/python-boilerplate#readme"
 repository = "https://github.com/smarlhens/python-boilerplate"
 
 [tool.poetry.scripts]
-myapplication = "myapplication.main:main"
+main = "main:main"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+exceptiongroup = "^1.2.2"
+tomli = "^2.0.1"
+coverage = "^7.6.1"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.dev-dependencies]
 pytest = "8.3.2"
 pytest-cov = "5.0.0"
 mypy = "1.11.1"
