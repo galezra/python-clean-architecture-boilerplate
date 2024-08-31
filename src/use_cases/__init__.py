@@ -43,7 +43,7 @@ class BaseUseCase(ABC, Generic[P, T_co]):
             result = await self.execute_use_case(params)
             return UseCaseResult(data=result)
         except Exception as e:
-            self.logger.exception("Error executing use case")
+            self.logger.exception("Error executing use case: %s", self.__class__.__name__)
             return UseCaseResult(
                 data=None,
                 status=UseCaseResultStatus.ERROR,
