@@ -5,11 +5,13 @@ This module contains the DTO classes used for transferring data between differen
 of the application, such as between the API and use cases.
 """
 
+from dataclasses import dataclass
 from typing import Generic, TypeVar
 
 T = TypeVar("T")
 
 
+@dataclass
 class BaseDTO(Generic[T]):
     """
     Base class for all DTOs in the application.
@@ -17,9 +19,6 @@ class BaseDTO(Generic[T]):
     This class provides a foundation for creating type-safe DTOs with common
     functionality.
     """
-
-    def __init__(self, data: T) -> None:
-        self.data: T = data
 
     def to_dict(self) -> dict:
         """

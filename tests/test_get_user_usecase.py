@@ -1,12 +1,10 @@
-from http import HTTPStatus
 from logging import Logger, getLogger
+from unittest import mock
 
 import pytest
 
-from dtos.user import UserResponse
 from entities.user import UserEntity
 from repositories import UserRepositoryInterface
-from use_cases import UseCaseResultStatus
 from use_cases.get_user import GetUserUseCase
 
 
@@ -45,14 +43,16 @@ async def test_get_user_success(get_user_use_case: GetUserUseCase) -> None:
     user_id = 1
     result = await get_user_use_case.execute(user_id)
 
-    pytest.assume(result.data == UserResponse(id=1, name="John Doe", email="john.doe@example.com"))
+    pytest.assume(result.data.id == 1)
+    pytest.assume(result.data.name == "John Doe")
+    pytest.assume(result.data.email == "john.doe@example.com")
 
 
 @pytest.mark.asyncio
 async def test_get_user_not_found(get_user_use_case: GetUserUseCase) -> None:
     user_id = 999
+    get_user_use_case.user_repository.get_by_id = mock.Mock(return_value=None)
 
     result = await get_user_use_case.execute(user_id)
 
-    pytest.assume(result.status.value == UseCaseResultStatus.ERROR.value)
-    pytest.assume(result.error_code == HTTPStatus.NOT_FOUND.value)
+    pytest.assume(result.data is None)

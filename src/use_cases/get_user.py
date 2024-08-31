@@ -1,27 +1,21 @@
 from logging import Logger
 
-from fastapi import HTTPException
-
-from dtos.user import UserResponse
+from entities.user import UserEntity
 from repositories import UserRepositoryInterface
 from use_cases import BaseUseCase
 
 
-class GetUserUseCase(BaseUseCase[int, UserResponse | None]):
+class GetUserUseCase(BaseUseCase[int, UserEntity | None]):
     user_repository: UserRepositoryInterface
 
     def __init__(self, user_repository: UserRepositoryInterface, logger: Logger) -> None:
         super().__init__(logger)
         self.user_repository = user_repository
 
-    async def execute_use_case(self, params: int) -> UserResponse | None:
+    async def execute_use_case(self, params: int) -> UserEntity | None:
         user = self.user_repository.get_by_id(params)
 
         if user is None:
-            raise HTTPException(status_code=404, detail="User not found")
+            return None
 
-        return UserResponse(
-            id=user.id,
-            name=user.name,
-            email=user.email,
-        )
+        return user

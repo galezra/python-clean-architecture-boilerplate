@@ -208,6 +208,19 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "mock"
+version = "5.1.0"
+description = "Rolling backport of unittest.mock for all Pythons"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+test = ["pytest", "pytest-cov"]
+docs = ["sphinx"]
+build = ["twine", "wheel", "blurb"]
+
+[[package]]
 name = "mypy"
 version = "1.11.1"
 description = "Optional static typing for Python"
@@ -456,7 +469,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.12"
-content-hash = "a6513bae1d09c1b51286e2b05501fbdb26ee87dc58ca503146bbb806b03c86f8"
+content-hash = "04e076c33a1f96ae7169c4cd64ec9b0a307607496acf451397ce1df93d83dbb7"
 
 [metadata.files]
 annotated-types = []
@@ -476,6 +489,7 @@ idna = []
 iniconfig = []
 markdown-it-py = []
 mdurl = []
+mock = []
 mypy = []
 mypy-extensions = []
 packaging = []
