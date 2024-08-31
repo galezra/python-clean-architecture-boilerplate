@@ -5,7 +5,6 @@ Use cases for the application.
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from enum import Enum
-from http import HTTPStatus
 from logging import Logger
 from typing import Any, Generic, Optional, TypeVar, Union
 
@@ -49,7 +48,7 @@ class BaseUseCase(ABC, Generic[P, T_co]):
                 data=None,
                 status=UseCaseResultStatus.ERROR,
                 error_message=str(e),
-                error_code=HTTPStatus.INTERNAL_SERVER_ERROR,
+                error_code=e.status_code if hasattr(e, "status_code") else 500,
             )
 
     @abstractmethod
