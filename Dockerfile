@@ -1,43 +1,29 @@
-FROM python:3.12.5-slim-bookworm as python-base
+ARG BUILDPLATFORM=linux/amd64
+FROM --platform=$BUILDPLATFORM python:3.12.5-slim-bookworm
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_NO_INTERACTION=1 \
-    PYSETUP_PATH="/opt/pysetup" \
-    VENV_PATH="/opt/pysetup/.venv"
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1
 
-ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+RUN pip install poetry==1.8.3
 
-FROM python-base as builder-base
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl \
-        build-essential
+WORKDIR /opt/app
 
-ENV POETRY_VERSION=1.8.3
-RUN curl -sSL https://install.python-poetry.org | python
+COPY pyproject.toml poetry.lock ./
 
-WORKDIR $PYSETUP_PATH
-COPY ./poetry.lock ./pyproject.toml ./
-RUN poetry install --no-root --no-dev
+RUN poetry export -f requirements.txt -o requirements.txt --without-hashes
 
-FROM builder-base as development
+FROM python:3.12.5-slim-bookworm
 
-RUN poetry install --no-root
+WORKDIR /opt/app
+
+RUN apt update && apt install -y build-essential curl git g++ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=0 /opt/app/requirements.txt ./
+RUN pip install --no-input -r requirements.txt
 
 COPY . .
 
-RUN poetry install
+ENV PORT=8000
+EXPOSE $PORT
 
-CMD ["python","-m", "main"]
-
-FROM python-base as production
-
-COPY --from=builder-base $VENV_PATH $VENV_PATH
-WORKDIR $PYSETUP_PATH
-COPY ./src/ ./
-USER 10000
-
-CMD ["python","-m", "main"]
+CMD uvicorn src.main:app --host 0.0.0.0 --port ${PORT}

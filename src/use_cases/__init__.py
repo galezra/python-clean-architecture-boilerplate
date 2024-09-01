@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from collections.abc import Callable
 from enum import Enum
 from logging import Logger
-from typing import Any, Generic, Optional, TypeVar, Union
+from typing import Generic, Optional, TypeVar, Union
 
 from fastapi import HTTPException
 
@@ -58,7 +58,7 @@ class BaseUseCase(ABC, Generic[P, T_co]):
 
 def handle_use_case_result(
     use_case_result: UseCaseResult[T_co],
-    on_completed: Callable[[T_co], Any],
+    on_completed: Callable[[T_co], Union[T_co, None]],
 ) -> Union[T_co, None]:
     if use_case_result.status == UseCaseResultStatus.COMPLETED:
         return on_completed(use_case_result.data)

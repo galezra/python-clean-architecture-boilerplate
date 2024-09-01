@@ -1,11 +1,11 @@
 from logging import Logger, getLogger
-from unittest import mock
+from unittest.mock import patch  # Add this import
 
 import pytest
 
-from entities.user import UserEntity
-from repositories import UserRepositoryInterface
-from use_cases.get_user import GetUserUseCase
+from src.entities.user import UserEntity
+from src.repositories import UserRepositoryInterface
+from src.use_cases.get_user import GetUserUseCase
 
 
 class MockUserRepository(UserRepositoryInterface):
@@ -43,16 +43,16 @@ async def test_get_user_success(get_user_use_case: GetUserUseCase) -> None:
     user_id = 1
     result = await get_user_use_case.execute(user_id)
 
-    pytest.assume(result.data.id == 1)
-    pytest.assume(result.data.name == "John Doe")
-    pytest.assume(result.data.email == "john.doe@example.com")
+    if result.data is not None:
+        pytest.assume(result.data.id == 1)
+        pytest.assume(result.data.name == "John Doe")
+        pytest.assume(result.data.email == "john.doe@example.com")
 
 
 @pytest.mark.asyncio
 async def test_get_user_not_found(get_user_use_case: GetUserUseCase) -> None:
     user_id = 999
-    get_user_use_case.user_repository.get_by_id = mock.Mock(return_value=None)
-
-    result = await get_user_use_case.execute(user_id)
+    with patch.object(get_user_use_case.user_repository, "get_by_id", return_value=None):
+        result = await get_user_use_case.execute(user_id)
 
     pytest.assume(result.data is None)

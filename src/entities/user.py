@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, TypedDict
 
-from entities import BaseEntity
+from src.entities import BaseEntity
 
 
 class User(TypedDict):

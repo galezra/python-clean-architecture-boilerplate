@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from api import router_config
+from src.api import router_config
 
 app = FastAPI()
 
@@ -20,10 +20,8 @@ def create_app() -> FastAPI:
     return app
 
 
-def main() -> None:
-    app = create_app()
-    uvicorn.run(app, host="127.0.0.1", port=8000)  # Should change to 0.0.0.0 in production
+app = create_app()
 
 
 if __name__ == "__main__":
-    main()
+    uvicorn.run(app, host="127.0.0.1", port=8000)  # Should change to 0.0.0.0 in production

@@ -2,10 +2,10 @@ from logging import getLogger
 
 from fastapi import APIRouter
 
-from dtos.user import UserResponse
-from repositories.user import UserRepository
-from use_cases import handle_use_case_result
-from use_cases.get_user import GetUserUseCase
+from src.dtos.user import UserResponse
+from src.repositories.user import UserRepository
+from src.use_cases import handle_use_case_result
+from src.use_cases.get_user import GetUserUseCase
 
 router = APIRouter()
 repo = UserRepository()

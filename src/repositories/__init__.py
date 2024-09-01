@@ -4,7 +4,7 @@ Repository interfaces and implementations.
 
 from abc import ABC, abstractmethod
 
-from entities.user import UserEntity
+from src.entities.user import UserEntity
 
 
 class UserRepositoryInterface(ABC):
