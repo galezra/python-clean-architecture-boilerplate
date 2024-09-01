@@ -1,15 +1,15 @@
 [tool.poetry]
-name = "python-boilerplate"
+name = "python-clean-architecture-boilerplate"
 version = "0.1.0"
-description = "Python boilerplate"
-authors = ["Samuel MARLHENS <samuel.marlhens@proton.me>"]
+description = "Python clean architecture boilerplate"
+authors = ["Gal Ezra <galezra@gmail.com>"]
 packages = [
     { include = "*", from = "src" }
 ]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/smarlhens/python-boilerplate#readme"
-repository = "https://github.com/smarlhens/python-boilerplate"
+homepage = "https://github.com/galezra/python-clean-architecture-boilerplate#readme"
+repository = "https://github.com/galezra/python-clean-architecture-boilerplate"
 
 [tool.poetry.scripts]
 main = "main:main"
