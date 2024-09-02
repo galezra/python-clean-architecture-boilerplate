@@ -1,5 +1,5 @@
-ARG BUILDPLATFORM=linux/amd64
-FROM --platform=$BUILDPLATFORM python:3.12.5-slim-bookworm
+# compile stage #
+FROM python:3.12.5-slim-bookworm
 
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1
@@ -12,6 +12,7 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry export -f requirements.txt -o requirements.txt --without-hashes
 
+# build stage #
 FROM python:3.12.5-slim-bookworm
 
 WORKDIR /opt/app
