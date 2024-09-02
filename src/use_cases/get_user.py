@@ -1,7 +1,7 @@
 from logging import Logger
 
 from src.dtos.user import UserResponse
-from src.repositories.user import IUserRepository
+from src.interfaces.user_repository import IUserRepository
 from src.use_cases import BaseUseCase
 
 

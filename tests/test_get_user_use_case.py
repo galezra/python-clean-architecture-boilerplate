@@ -4,7 +4,7 @@ from unittest.mock import patch  # Add this import
 import pytest
 
 from src.entities.user import UserEntity
-from src.repositories import IUserRepository
+from src.interfaces.user_repository import IUserRepository
 from src.use_cases.get_user import GetUserUseCase
 
 
