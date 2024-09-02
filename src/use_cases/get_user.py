@@ -1,14 +1,14 @@
 from logging import Logger
 
 from src.dtos.user import UserResponse
-from src.repositories import UserRepositoryInterface
+from src.repositories.user import IUserRepository
 from src.use_cases import BaseUseCase
 
 
 class GetUserUseCase(BaseUseCase[int, UserResponse | None]):
-    user_repository: UserRepositoryInterface
+    user_repository: IUserRepository
 
-    def __init__(self, user_repository: UserRepositoryInterface, logger: Logger) -> None:
+    def __init__(self, user_repository: IUserRepository, logger: Logger) -> None:
         super().__init__(logger)
         self.user_repository = user_repository
 

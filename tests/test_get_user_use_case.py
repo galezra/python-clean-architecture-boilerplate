@@ -4,11 +4,11 @@ from unittest.mock import patch  # Add this import
 import pytest
 
 from src.entities.user import UserEntity
-from src.repositories import UserRepositoryInterface
+from src.repositories import IUserRepository
 from src.use_cases.get_user import GetUserUseCase
 
 
-class MockUserRepository(UserRepositoryInterface):
+class MockUserRepository(IUserRepository):
     def __init__(self, users: list[UserEntity]) -> None:
         self.users = users
 

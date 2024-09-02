@@ -1,8 +1,15 @@
+from abc import ABC, abstractmethod
+
 from src.entities.user import UserEntity
-from src.repositories import UserRepositoryInterface
 
 
-class UserRepository(UserRepositoryInterface):
+class IUserRepository(ABC):
+    @abstractmethod
+    def get_by_id(self, user_id: int) -> UserEntity | None:
+        pass
+
+
+class UserRepository(IUserRepository):
     def __init__(self) -> None:
         self.data = [UserEntity(id=1, name="John Doe", email="john.doe@example.com")]
 
