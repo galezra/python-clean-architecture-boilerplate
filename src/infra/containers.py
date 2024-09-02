@@ -1,3 +1,4 @@
+import os
 from logging import getLogger
 
 from dependency_injector import containers, providers
@@ -6,8 +7,13 @@ from src.repositories.user import UserRepository
 from src.use_cases.get_user import GetUserUseCase
 
 
-class Container(containers.DeclarativeContainer):
-    config = providers.Configuration(yaml_files=["config/configuration.yaml"])
+class ApplicationContainer(containers.DeclarativeContainer):
+    config = providers.Configuration()
+
+    env = os.getenv("ENVIRONMENT", "default")
+
+    config.from_yaml(f"config/{env}.yaml", required=True)
+
     logger = providers.Singleton(getLogger, name="app")
 
     user_repository = providers.Singleton(UserRepository)
@@ -19,5 +25,5 @@ class Container(containers.DeclarativeContainer):
     )
 
 
-def get_application_container() -> Container:
-    return Container()
+def get_application_container() -> ApplicationContainer:
+    return ApplicationContainer()

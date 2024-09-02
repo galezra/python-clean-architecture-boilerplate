@@ -24,7 +24,8 @@ fastapi = "^0.112.2"
 uvicorn = "^0.30.6"
 pytest-asyncio = "^0.24.0"
 mock = "^5.1.0"
-dependency-injector = "4.42.0b1"
+dependency-injector = {version = "4.42.0b1", extras = ["yaml"]}
+pydantic-settings = "^2.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "8.3.2"
@@ -33,6 +34,14 @@ mypy = "1.11.1"
 bandit = "1.7.9"
 docformatter = "1.7.5"
 ruff = "0.6.0"
+
+[tool.mypy]
+[[tool.mypy.overrides]]
+module = "yaml"
+ignore_missing_imports = true
+
+[tool.poetry.group.dev.dependencies]
+types-pyyaml = "^6.0.12.20240808"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
