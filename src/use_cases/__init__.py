@@ -48,7 +48,7 @@ class BaseUseCase(ABC, Generic[P, T_co]):
                 data=None,
                 status=UseCaseResultStatus.ERROR,
                 error_message=str(e),
-                error_code=e.status_code if hasattr(e, "status_code") else 500,
+                error_code=getattr(e, "status_code", 500),
             )
 
     @abstractmethod

@@ -1,9 +1,12 @@
-import uvicorn
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
 from src.api import router_config
+from src.infra.containers import Container, get_application_container
 
-app = FastAPI()
+container = Container()
 
 
 def init_routers(app: FastAPI) -> None:
@@ -15,13 +18,27 @@ def init_routers(app: FastAPI) -> None:
         )
 
 
-def create_app() -> FastAPI:
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    container.init_resources()
     init_routers(app)
-    return app
+    try:
+        yield
+    finally:
+        container.shutdown_resources()
+
+
+def create_app() -> FastAPI:
+    get_application_container().wire(
+        modules=[__name__],
+        packages=["src.api"],
+    )
+    return FastAPI(lifespan=lifespan)
 
 
 app = create_app()
 
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)  # Should change to 0.0.0.0 in production
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=8000)
