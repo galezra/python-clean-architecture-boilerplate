@@ -1,64 +1,46 @@
-<p align="center">
-  <a href="https://python-poetry.org/" target="blank"><img src="https://python-poetry.org/images/logo-origami.svg" height="100" alt="Poetry logo" /></a>
-  <a href="https://pre-commit.com/" target="blank"><img src="https://pre-commit.com/logo.svg" height="100" alt="pre-commit logo" /></a>
-  <a href="https://github.com/astral-sh/ruff" target="blank"><img src="https://raw.githubusercontent.com/astral-sh/ruff/8c20f14e62ddaf7b6d62674f300f5d19cbdc5acb/docs/assets/bolt.svg" height="100" alt="ruff logo" style="background-color: #ef5552" /></a>
-  <a href="https://bandit.readthedocs.io/" target="blank"><img src="https://raw.githubusercontent.com/pycqa/bandit/main/logo/logo.svg" height="100" alt="bandit logo" /></a>
-  <a href="https://docs.pytest.org/" target="blank"><img src="https://raw.githubusercontent.com/pytest-dev/pytest/main/doc/en/img/pytest_logo_curves.svg" height="100" alt="pytest logo" /></a>
-</p>
-
-<p align="center">
-  <a href="https://docs.docker.com/" target="blank"><img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" height="60" alt="Docker logo" /></a>
-  <a href="https://github.com/features/actions" target="blank"><img src="https://avatars.githubusercontent.com/u/44036562" height="60" alt="GitHub Actions logo" /></a>
-</p>
-
 # Python Clean Architecture Boilerplate
 
 [![CodeQL](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/codeql/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/codeql.yml)
 [![GitHub CI](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/ci/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/ci.yml)
 [![GitHub license](https://img.shields.io/github/license/galezra/python-clean-architecture-boilerplate)](https://github.com/galezra/python-clean-architecture-boilerplate)
 
----
+A robust Python boilerplate implementing clean architecture principles, with integrated tools for development, testing, and deployment.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [What's in the box ?](#whats-in-the-box-)
+- [Clean Architecture](#clean-architecture)
+- [Development Tools](#development-tools)
 - [Testing](#testing)
 - [Docker](#docker)
-
----
+- [Configuration](#configuration)
+- [License](#license)
 
 ## Prerequisites
 
-- [Python](https://www.python.org/downloads/) **>=3.12 <3.13** (_tested with 3.12.5_)
+- Python **>=3.12 <3.13** (tested with 3.12.5)
 - [pre-commit](https://pre-commit.com/#install)
-- [poetry](https://python-poetry.org/docs/#installation) **>=1.2.2 <1.9** (_tested with 1.8.3_)
-- [docker](https://docs.docker.com/get-docker/) (_optional_)
-
----
+- [poetry](https://python-poetry.org/docs/#installation) **>=1.2.2 <1.9** (tested with 1.8.3)
+- [docker](https://docs.docker.com/get-docker/) (optional)
 
 ## Installation
 
-1. Clone the git repository
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/galezra/python-clean-architecture-boilerplate.git
-   ```
-
-2. Go into the project directory
-
-   ```bash
    cd python-clean-architecture-boilerplate/
    ```
 
-3. Checkout working branch
+2. Install dependencies:
 
    ```bash
-   git checkout <branch>
+   poetry install
    ```
 
-4. Enable pre-commit hooks
+3. Set up pre-commit hooks:
 
    ```bash
    pre-commit install
@@ -122,94 +104,84 @@ Options are defined in the [`.pre-commit-config.yaml`](.pre-commit-config.yaml).
 
 ---
 
+## Clean Architecture
+
+This boilerplate follows the principles of Clean Architecture, which promotes separation of concerns and independence of frameworks. The project structure is organized into layers:
+
+1. **Domain Layer**: Contains business logic and entities.
+2. **Use Case Layer**: Implements application-specific business rules.
+3. **Interface Adapters**: Converts data between the use cases and external agencies.
+4. **Frameworks and Drivers**: Contains frameworks and tools like databases, web frameworks, etc.
+
+Benefits of this architecture:
+
+- **Testability**: Business logic can be tested independently of the UI, database, or any external element.
+- **Independence of Framework**: The architecture doesn't depend on the existence of some library of feature-laden software.
+- **Independence of UI**: The UI can change easily, without changing the rest of the system.
+- **Independence of Database**: You can swap out databases without affecting the business rules.
+
+The `src/` directory is structured to reflect these layers, promoting a clear separation of concerns and making the codebase more maintainable and scalable.
+
+---
+
+## Development Tools
+
+This boilerplate includes several development tools to ensure code quality and consistency:
+
+- **Poetry**: Dependency management and packaging
+- **pre-commit**: Multi-language pre-commit hook framework
+- **ruff**: Fast Python linter and formatter
+- **mypy**: Static type checker
+- **bandit**: Security issue finder
+- **docformatter**: Docstring formatter
+- **pytest**: Testing framework
+
+For detailed configurations, refer to `pyproject.toml` and `.pre-commit-config.yaml`.
+
+---
+
 ## Testing
 
-We are using [pytest](https://docs.pytest.org/) & [pytest-cov](https://github.com/pytest-dev/pytest-cov) to write tests.
-
-To run tests:
+Run tests using pytest:
 
 ```bash
 poetry run pytest tests
 ```
 
-<details>
-
-<summary>Output</summary>
-
-```text
-collected 1 item
-
-tests/test.py::test_hello_world PASSED
-```
-
-</details>
-
-To run tests with coverage:
+For coverage report:
 
 ```bash
 poetry run pytest tests --cov=src
 ```
 
-<details>
-
-<summary>Output</summary>
-
-```text
-collected 1 item
-
-tests/test.py::test_hello_world PASSED
-
----------- coverage: platform linux, python 3.10.4-final-0 -----------
-Name                            Stmts   Miss  Cover
----------------------------------------------------
-src/__init__.py       1      0   100%
-src/main.py           6      2    67%
----------------------------------------------------
-TOTAL                               7      2    71%
-```
-
-</details>
-
 ---
 
 ## Docker
 
-### Build
-
-To build the docker `production` image using [`Dockerfile`](Dockerfile):
+Build the Docker image:
 
 ```bash
 docker build . -t my-python-application:latest
 ```
 
-To build the docker `development` image using [`Dockerfile`](Dockerfile):
-
-```bash
-docker build . --target development -t my-python-application:dev
-```
-
-### Run
-
-To run the python app example inside Docker:
-
-```bash
-docker run -it --rm my-python-application:latest # or :dev for development
-```
-
-<details>
-
-<summary>Output</summary>
-
-```text
-Hello World
-```
-
-</details>
-
-### Execute command inside container
+Run the application in Docker:
 
 ```bash
 docker run -p 8000:8000 -it --rm my-python-application:latest
 ```
 
 ---
+
+## Configuration
+
+The application uses YAML configuration files located in the `config/` directory. The `ENVIRONMENT` environment variable determines which configuration file to use:
+
+- `config/default.yaml`: Default configuration
+- `config/staging.yaml`: Staging environment configuration
+- `config/production.yaml`: Production environment configuration
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
