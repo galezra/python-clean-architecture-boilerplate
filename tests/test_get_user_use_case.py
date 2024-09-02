@@ -1,5 +1,5 @@
 from logging import Logger, getLogger
-from unittest.mock import patch  # Add this import
+from unittest.mock import patch
 
 import pytest
 
@@ -42,11 +42,10 @@ def get_user_use_case(mock_user_repository: MockUserRepository, mock_logger: Log
 async def test_get_user_success(get_user_use_case: GetUserUseCase) -> None:
     user_id = 1
     result = await get_user_use_case.execute(user_id)
-
     if result.data is not None:
-        pytest.assume(result.data.id == 1)
-        pytest.assume(result.data.name == "John Doe")
-        pytest.assume(result.data.email == "john.doe@example.com")
+        assert result.data.id == 1
+        assert result.data.name == "John Doe"
+        assert result.data.email == "john.doe@example.com"
 
 
 @pytest.mark.asyncio
@@ -55,4 +54,4 @@ async def test_get_user_not_found(get_user_use_case: GetUserUseCase) -> None:
     with patch.object(get_user_use_case.user_repository, "get_by_id", return_value=None):
         result = await get_user_use_case.execute(user_id)
 
-    pytest.assume(result.data is None)
+    assert result.data is None

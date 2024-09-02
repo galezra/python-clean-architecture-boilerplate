@@ -1,9 +1,10 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+from typing import Protocol
 
 from src.entities.user import UserEntity
 
 
-class IUserRepository(ABC):
+class IUserRepository(Protocol):
     @abstractmethod
     def get_by_id(self, user_id: int) -> UserEntity | None:
         pass
