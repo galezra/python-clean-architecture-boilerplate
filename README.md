@@ -209,7 +209,7 @@ Hello World
 ### Execute command inside container
 
 ```bash
-docker run -it --rm my-python-application:latest bash
+docker run -p 8000:8000 -it --rm my-python-application:latest
 ```
 
 ---
