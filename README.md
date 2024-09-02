@@ -11,11 +11,11 @@
   <a href="https://github.com/features/actions" target="blank"><img src="https://avatars.githubusercontent.com/u/44036562" height="60" alt="GitHub Actions logo" /></a>
 </p>
 
-# Python boilerplate
+# Python Clean Architecture Boilerplate
 
-[![CodeQL](https://github.com/smarlhens/python-boilerplate/workflows/codeql/badge.svg)](https://github.com/smarlhens/python-boilerplate/actions/workflows/codeql.yml)
-[![GitHub CI](https://github.com/smarlhens/python-boilerplate/workflows/ci/badge.svg)](https://github.com/smarlhens/python-boilerplate/actions/workflows/ci.yml)
-[![GitHub license](https://img.shields.io/github/license/smarlhens/python-boilerplate)](https://github.com/smarlhens/python-boilerplate)
+[![CodeQL](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/codeql/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/codeql.yml)
+[![GitHub CI](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/ci/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/ci.yml)
+[![GitHub license](https://img.shields.io/github/license/galezra/python-clean-architecture-boilerplate)](https://github.com/galezra/python-clean-architecture-boilerplate)
 
 ---
 
@@ -43,13 +43,13 @@
 1. Clone the git repository
 
    ```bash
-   git clone https://github.com/smarlhens/python-boilerplate.git
+   git clone https://github.com/galezra/python-clean-architecture-boilerplate.git
    ```
 
 2. Go into the project directory
 
    ```bash
-   cd python-boilerplate/
+   cd python-clean-architecture-boilerplate/
    ```
 
 3. Checkout working branch
