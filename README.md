@@ -1,7 +1,5 @@
 # Python Clean Architecture Boilerplate
 
-[![CodeQL](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/codeql/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/codeql.yml)
-[![GitHub CI](https://github.com/galezra/python-clean-architecture-boilerplate/workflows/ci/badge.svg)](https://github.com/galezra/python-clean-architecture-boilerplate/actions/workflows/ci.yml)
 [![GitHub license](https://img.shields.io/github/license/galezra/python-clean-architecture-boilerplate)](https://github.com/galezra/python-clean-architecture-boilerplate)
 
 A robust Python boilerplate implementing clean architecture principles, with integrated tools for development, testing, and deployment.
