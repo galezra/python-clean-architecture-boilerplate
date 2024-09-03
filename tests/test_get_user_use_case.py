@@ -3,9 +3,9 @@ from unittest.mock import patch
 
 import pytest
 
-from src.entities.user import UserEntity
-from src.repositories import IUserRepository
-from src.use_cases.get_user import GetUserUseCase
+from src.app.entities.user import UserEntity
+from src.app.repositories import IUserRepository
+from src.app.use_cases.get_user import GetUserUseCase
 
 
 class MockUserRepository(IUserRepository):

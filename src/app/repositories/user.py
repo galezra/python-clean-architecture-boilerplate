@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Protocol
 
-from src.entities.user import UserEntity
+from src.app.entities.user import UserEntity
 
 
 class IUserRepository(Protocol):

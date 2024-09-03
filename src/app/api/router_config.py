@@ -1,4 +1,4 @@
-from src.api.v1 import user
+from src.app.api.v1 import user
 
 ROUTERS = [
     {

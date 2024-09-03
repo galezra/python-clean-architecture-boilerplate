@@ -3,8 +3,8 @@ from logging import getLogger
 
 from dependency_injector import containers, providers
 
-from src.repositories.user import UserRepository
-from src.use_cases.get_user import GetUserUseCase
+from src.app.repositories.user import UserRepository
+from src.app.use_cases.get_user import GetUserUseCase
 
 
 class ApplicationContainer(containers.DeclarativeContainer):

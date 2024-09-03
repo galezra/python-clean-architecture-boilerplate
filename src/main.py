@@ -4,14 +4,14 @@ from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
 
-from src.api import router_config
+from src.app.api.router_config import ROUTERS
 from src.infra.containers import ApplicationContainer, get_application_container
 
 container = ApplicationContainer()
 
 
 def init_routers(app: FastAPI) -> None:
-    for router_info in router_config.ROUTERS:
+    for router_info in ROUTERS:
         app.include_router(**router_info)
 
 
@@ -28,7 +28,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 def init_app() -> FastAPI:
     get_application_container().wire(
         modules=[__name__],
-        packages=["src.api"],
+        packages=["src"],
     )
     return FastAPI(lifespan=lifespan)
 

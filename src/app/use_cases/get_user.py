@@ -1,8 +1,8 @@
 from logging import Logger
 
-from src.dtos.user import UserResponse
-from src.repositories.user import IUserRepository
-from src.use_cases import BaseUseCase
+from src.app.dtos.user import UserResponse
+from src.app.repositories.user import IUserRepository
+from src.app.use_cases import BaseUseCase
 
 
 class GetUserUseCase(BaseUseCase[int, UserResponse | None]):

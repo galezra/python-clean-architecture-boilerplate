@@ -1,10 +1,10 @@
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends
 
-from src.dtos.user import UserResponse
+from src.app.dtos.user import UserResponse
+from src.app.use_cases import handle_use_case_result
+from src.app.use_cases.get_user import GetUserUseCase
 from src.infra.containers import ApplicationContainer
-from src.use_cases import handle_use_case_result
-from src.use_cases.get_user import GetUserUseCase
 
 router = APIRouter()
 
