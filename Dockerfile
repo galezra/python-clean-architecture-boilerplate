@@ -1,5 +1,5 @@
 # compile stage #
-FROM python:3.12.5-slim-bookworm
+FROM python:3.13.2-slim-bookworm
 
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1
@@ -13,7 +13,7 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry export -f requirements.txt -o requirements.txt --without-hashes
 
 # build stage #
-FROM python:3.12.5-slim-bookworm
+FROM python:3.13.2-slim-bookworm
 
 WORKDIR /opt/app
 
