@@ -1,11 +1,13 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     "schedule:daily",
     "group:all",
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
     ":prImmediately"
   ],
-  "labels": ["dependencies"]
+  "labels": [
+    "dependencies"
+  ]
 }
