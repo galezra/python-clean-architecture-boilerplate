@@ -28,7 +28,7 @@ dependency-injector = {version = "4.49.1", extras = ["yaml"]}
 pydantic-settings = "^2.4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "8.3.5"
+pytest = "9.0.3"
 pytest-cov = "7.1.0"
 mypy = "2.1.0"
 bandit = "1.9.4"
